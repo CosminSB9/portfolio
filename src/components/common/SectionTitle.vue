@@ -1,11 +1,11 @@
 <template>
-  <h2 class="section-title fade-in">{{ text }}</h2>
+  <!-- Associa il ref 'titleEl' all'elemento h2 -->
+  <h2 ref="titleEl" class="section-title fade-in">{{ text }}</h2>
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, nextTick } from 'vue';
+import { defineProps, onMounted, nextTick, ref } from 'vue';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 
 const props = defineProps({
   text: {
@@ -14,23 +14,28 @@ const props = defineProps({
   }
 });
 
+// Crea un ref per l'elemento del titolo
+const titleEl = ref<HTMLElement | null>(null);
+
 onMounted(() => {
   nextTick(() => {
-    // Applica animazione solo al titolo di questa istanza
-    gsap.fromTo(document.querySelector(`#${gsap.utils.toArray('.section-title').find(el => el.textContent === props.text)?.parentElement?.parentElement?.id} .section-title`),
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: document.querySelector(`#${gsap.utils.toArray('.section-title').find(el => el.textContent === props.text)?.parentElement?.parentElement?.id}`),
-          start: 'top 80%',
-          toggleActions: 'play none none none',
+    // Assicurati che l'elemento esista prima di animarlo
+    if (titleEl.value) {
+      gsap.fromTo(titleEl.value,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: titleEl.value,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          }
         }
-      }
-    );
+      );
+    }
   });
 });
 </script>
