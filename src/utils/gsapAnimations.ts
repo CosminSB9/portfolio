@@ -15,7 +15,7 @@ export const setupFadeInAnimation = (selector: string, startTrigger = 'top 80%')
         trigger: el,
         start: startTrigger,
         toggleActions: 'play none none none',
-         onEnter: () => el.classList.remove('fade-in') // Rimuovi la classe se GSAP la gestisce
+        // onEnter: () => el.classList.remove('fade-in') // Rimuovi la classe se GSAP la gestisce
       }
     });
   });

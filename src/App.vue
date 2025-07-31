@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div class="app">
+      <!-- Layout Components -->
       <MouseHighlight />
       <BackgroundBlobs />
       <NavigationBar @scroll-to-section="scrollToSection" />
 
+      <!-- Sections -->
       <HeroSection @scroll-to-section="scrollToSection" />
       <SkillsSection />
       <ExperienceSection />

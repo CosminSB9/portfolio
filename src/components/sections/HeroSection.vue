@@ -7,9 +7,10 @@
       </h1>
       <p class="hero-subtitle">Full Stack Developer</p>
       <div class="hero-description">
-        <p>Sviluppatore Full Stack specializzato in <strong>Vue/Nuxt</strong> e <strong>TypeScript</strong>,
-          con solida esperienza in backend <strong>PHP/Laravel</strong>.
-          Esperto in brand identity, e-commerce e software gestionali.</p>
+        <p>Sviluppatore Full Stack specializzato in <strong>Vue/Nuxt</strong>, <strong>TypeScript</strong> e 
+             nel backend <strong>PHP/Laravel</strong>. Mi dedico principalmente allo sviluppo di 
+            <strong>software gestionali</strong>, ma sono anche un appassionato di animazioni, micro-interazioni e game development, 
+            che integro nei miei progetti per creare esperienze utente uniche.</p>
       </div>
     </div>
   </section>
@@ -18,7 +19,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { gsap } from 'gsap';
-import InteractiveButton from '../common/InteractiveButton.vue'; // Importa il componente bottone
 
 const emit = defineEmits(['scrollToSection']);
 

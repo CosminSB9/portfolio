@@ -37,7 +37,6 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import SectionTitle from '../common/SectionTitle.vue';
 
 const projects = ref([
@@ -97,7 +96,7 @@ const setupProjectsScrollAnimations = () => {
       ease: 'back.out(1.7)',
       scrollTrigger: {
         trigger: el,
-        start: 'top 80%',
+        start: 'top 100%',
         toggleActions: 'play none none reverse',
       }
     });

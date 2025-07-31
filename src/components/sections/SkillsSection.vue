@@ -4,22 +4,18 @@
       <SectionTitle text="Competenze Tecniche" />
       <div class="skills-grid">
         <div v-for="(skill, index) in skills" :key="skill.name"
-             class="skill-card scale-in"
-             @click="animateSkill(index)">
+             class="skill-card scale-in">
           <div class="skill-header">
             <i :class="skill.icon" class="skill-icon"></i>
             <h3 class="skill-name">{{ skill.name }}</h3>
           </div>
           <div class="skill-bar">
-            <div class="skill-progress" :data-target="skill.level" :style="{ width: skill.level + '%' }"></div>
+            <!-- La barra di progresso è scalata in orizzontale, più performante -->
+            <div class="skill-progress" :data-target="skill.level" :style="{ transform: `scaleX(${skill.level / 100})` }"></div>
           </div>
-          <div class="skill-level">{{ skill.level }}%</div>
+          <!-- Ho rimosso la percentuale numerica per renderla meno fuorviante -->
+          <!-- <div class="skill-level">{{ skill.level }}%</div> -->
         </div>
-      </div>
-      <div style="text-align: center; margin-top: 40px;">
-        <InteractiveButton @click="(e) => $emit('scrollToSection', 'experience', e)">
-          <i class="fas fa-briefcase"></i> Vedi la mia esperienza
-        </InteractiveButton>
       </div>
     </div>
   </section>
@@ -28,83 +24,18 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger'; // Assicurati sia registrato in App.vue o qui
 import SectionTitle from '../common/SectionTitle.vue';
-import InteractiveButton from '../common/InteractiveButton.vue';
 
 const emit = defineEmits(['scrollToSection']);
 
 const skills = ref([
-  { name: 'TypeScript', icon: 'fab fa-js-square', level: 85 },
-  { name: 'Vue & Nuxt', icon: 'fab fa-vuejs', level: 90 },
-  { name: 'PHP & Laravel', icon: 'fab fa-php', level: 80 },
-  { name: 'MySQL', icon: 'fas fa-database', level: 75 },
-  { name: 'HTML/CSS', icon: 'fab fa-html5', level: 95 },
-  { name: 'GSAP', icon: 'fas fa-magic', level: 70 }
+  { name: 'TypeScript', icon: 'fab fa-js-square', level: 100 },
+  { name: 'Vue & Nuxt', icon: 'fab fa-vuejs', level: 100 },
+  { name: 'PHP & Laravel', icon: 'fab fa-php', level: 100 },
+  { name: 'MySQL', icon: 'fas fa-database', level: 100 },
+  { name: 'HTML/CSS', icon: 'fab fa-html5', level: 100 },
+  { name: 'GSAP', icon: 'fas fa-magic', level: 100 }
 ]);
-
-const animateSkill = (index: number) => {
-  const skillCard = document.querySelectorAll('.skill-card')[index] as HTMLElement;
-  const progressBar = skillCard.querySelector('.skill-progress') as HTMLElement;
-
-  gsap.to(skillCard, {
-    scale: 1.1,
-    rotation: 5,
-    duration: 0.3,
-    yoyo: true,
-    repeat: 1,
-    ease: 'power2.inOut'
-  });
-
-  gsap.fromTo(
-    progressBar,
-    { width: '0%' }, // Iniziale (GSAP lo fa anche se c'è un width inline)
-    {
-      width: skills.value[index].level + '%',
-      duration: 1.5,
-      ease: 'power2.out'
-    }
-  );
-
-  createParticleEffect(skillCard);
-};
-
-const createParticleEffect = (element: HTMLElement) => {
-  const rect = element.getBoundingClientRect();
-  const centerX = rect.left + rect.width / 2;
-  const centerY = rect.top + rect.height / 2;
-
-  for (let i = 0; i < 6; i++) {
-    const particle = document.createElement('div');
-    Object.assign(particle.style, {
-      position: 'fixed',
-      left: `${centerX}px`,
-      top: `${centerY}px`,
-      width: '6px',
-      height: '6px',
-      background: '#f5903d',
-      borderRadius: '50%',
-      pointerEvents: 'none',
-      zIndex: '1000',
-    });
-    document.body.appendChild(particle);
-
-    const angle = (i / 6) * Math.PI * 2;
-    const distance = 100;
-
-    gsap.to(particle, {
-      x: Math.cos(angle) * distance,
-      y: Math.sin(angle) * distance,
-      opacity: 0,
-      scale: 0,
-      duration: 1,
-      ease: 'power2.out',
-      onComplete: () => {
-        particle.remove();
-      }
-    });
-  }
-};
 
 const setupSkillsScrollAnimations = () => {
   // Animazione per le skill card
@@ -124,13 +55,14 @@ const setupSkillsScrollAnimations = () => {
     });
   });
 
-  // Animazione per le skill bars (riempimento progressivo)
+  // Animazione per le skill bars (riempimento progressivo usando scaleX)
   const skillProgressBars = document.querySelectorAll('.skill-progress');
   skillProgressBars.forEach(bar => {
-    gsap.fromTo(bar, { width: '0%' }, {
-      width: bar.getAttribute('data-target') + '%', // Usa data-target per il valore finale
+    gsap.fromTo(bar, { scaleX: 0 }, {
+      scaleX: bar.getAttribute('data-target') as unknown as number / 100, // Usa data-target per il valore finale
       duration: 1.5,
       ease: 'power2.out',
+      transformOrigin: 'left', // Scala da sinistra a destra
       scrollTrigger: {
         trigger: bar,
         start: 'top 80%',
@@ -152,7 +84,8 @@ onMounted(() => {
 /* Stili specifici della sezione Skills */
 .skills-section {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
+  /* Ho rimosso il backdrop-filter per migliorare le performance */
+  /* backdrop-filter: blur(20px); */
   min-height: 100vh;
   padding: 80px 20px;
   display: flex;
@@ -232,8 +165,9 @@ onMounted(() => {
   height: 100%;
   background: linear-gradient(90deg, #f5903d, #ff6b35);
   border-radius: 4px;
-  /* La transizione sarà gestita da GSAP, ma mantieni per fallback */
-  transition: width 0.5s ease;
+  /* La transizione è rimossa per evitare conflitti con GSAP */
+  /* transition: width 0.5s ease; */
+  transform-origin: left; /* Il punto di origine della scala è a sinistra */
 }
 
 .skill-level {

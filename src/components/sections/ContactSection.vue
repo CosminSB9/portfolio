@@ -1,12 +1,15 @@
 <template>
   <section id="contact" class="section contact-section">
     <div style="text-align: center; color: white;">
-      <h2 class="section-title fade-in" style="color: white;">Lavoriamo Insieme!</h2>
-      <p class="fade-in contact-description">
+      <!-- Rimosso `fade-in` da qui -->
+      <SectionTitle text="Lavoriamo Insieme!" />
+      <!-- Rimosso `fade-in` da qui -->
+      <p class="contact-description">
         Sono sempre aperto a nuove opportunità professionali e progetti interessanti.
         Non esitare a contattarmi!
       </p>
       <div class="contact-buttons-container">
+        <!-- Questi pulsanti non hanno classi di animazione nel template -->
         <InteractiveButton @click="openEmail" style="background: rgba(255,255,255,0.2);">
           <i class="fas fa-envelope"></i> Invia Email
         </InteractiveButton>
@@ -31,6 +34,7 @@ import { onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import InteractiveButton from '../common/InteractiveButton.vue';
+import SectionTitle from '../common/SectionTitle.vue'; // Aggiunto import del titolo
 
 const openEmail = () => {
   window.location.href = 'mailto:stefanoo2013@gmail.com?subject=Contatto&body=Ciao, ti scrivo dal tuo portfolio...';
@@ -45,31 +49,30 @@ const openLinkedIn = () => {
 };
 
 const setupContactScrollAnimations = () => {
-  const fadeInEls = document.querySelectorAll('#contact .fade-in');
-  fadeInEls.forEach(el => {
-    gsap.fromTo(el, { opacity: 0, y: 50 }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-      }
-    });
+  // Animazione del titolo e descrizione
+  gsap.fromTo('.contact-section .section-title, .contact-section .contact-description', { opacity: 0, y: 50 }, {
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    ease: 'power2.out',
+    stagger: 0.2, // Stagger per il titolo e la descrizione
+    scrollTrigger: {
+      trigger: '.contact-section',
+      start: 'top 80%',
+      toggleActions: 'play none none none',
+    }
   });
 
-  gsap.from('.contact-buttons-container button', {
-    opacity: 0,
-    scale: 0.8,
-    y: 30,
-    stagger: 0.2,
+  gsap.fromTo('.contact-buttons-container button', { opacity: 0},{
+    opacity: 1,
+    scale: 0.9,
+    y: 0,
+    stagger: 0.1,
     duration: 0.6,
-    ease: 'back.out(1.7)',
+    ease: 'back.out(1.5)',
     scrollTrigger: {
       trigger: '.contact-buttons-container',
-      start: 'top 80%',
+      start: 'top 90%',
       toggleActions: 'play none none reverse',
     }
   });
@@ -82,7 +85,7 @@ const setupContactScrollAnimations = () => {
     ease: 'power1.out',
     scrollTrigger: {
       trigger: '.additional-info',
-      start: 'top 80%',
+      start: 'top 90%',
       toggleActions: 'play none none reverse',
     }
   });
@@ -140,6 +143,7 @@ onMounted(() => {
 }
 
 /* Animazioni base per GSAP ScrollTrigger */
+/* Queste classi sono definite nel main.css e usate da GSAP */
 .fade-in {
   opacity: 0;
   transform: translateY(50px);

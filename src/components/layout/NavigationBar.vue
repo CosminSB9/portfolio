@@ -9,6 +9,9 @@
     <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'experience', e)" title="Esperienza">
       <i class="fas fa-briefcase"></i>
     </button>
+    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'projects', e)" title="Progetti">
+      <i class="fas fa-folder-open"></i>
+    </button>
     <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'contact', e)" title="Contatti">
       <i class="fas fa-envelope"></i>
     </button>
