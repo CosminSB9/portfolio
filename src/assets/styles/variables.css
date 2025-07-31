@@ -1,0 +1,9 @@
+:root {
+  --primary-color: #f5903d;
+  --secondary-color: #ff6b35;
+  --light-text-color: white;
+  --dark-text-color: #333;
+  --bg-gradient-start: #f0a262;
+  --bg-gradient-end: #f5903d;
+  /* Altre variabili come font-sizes, spacing, etc. */
+}

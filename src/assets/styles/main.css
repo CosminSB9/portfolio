@@ -1,0 +1,66 @@
+/* Resets e stili globali */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0a262 0%, #f5903d 100%);
+  overflow-x: hidden;
+  color: #333; /* Colore testo di default */
+}
+
+#app {
+  /* Stili per il contenitore principale di Vue */
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Stili comuni per tutte le sezioni */
+.section {
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10; /* Assicura che le sezioni siano sopra i blobs */
+}
+
+/* Animazioni di base per gli elementi che useranno ScrollTrigger */
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Ottimizzazione performance per elementi animati con GSAP */
+.skill-card, .skill-progress, .project-card,
+.hero-title, .hero-subtitle, .hero-description, .contact-item,
+.interactive-btn, .timeline-item, .section-title,
+.contact-description, .contact-buttons-container button, .additional-info p {
+  will-change: transform, opacity, width;
+}
+
+/* Responsive generale */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 15px;
+  }
+}
