@@ -17,7 +17,8 @@
     "@fortawesome/fontawesome-free": "^7.0.0",
     "gsap": "^3.13.0",
     "pinia": "^3.0.3",
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "vue-i18n": "^11.1.11"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",

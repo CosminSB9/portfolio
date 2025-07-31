@@ -1,25 +1,27 @@
 <template>
   <div class="nav-container">
-    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'hero', e)" title="Home">
+    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'hero', e)" :title="$t('general.home')">
       <i class="fas fa-home"></i>
     </button>
-    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'skills', e)" title="Skills">
+    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'skills', e)" :title="$t('general.skills')">
       <i class="fas fa-code"></i>
     </button>
-    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'experience', e)" title="Esperienza">
+    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'experience', e)" :title="$t('general.experience')">
       <i class="fas fa-briefcase"></i>
     </button>
-    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'projects', e)" title="Progetti">
-      <i class="fas fa-folder-open"></i>
+    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'projects', e)" :title="$t('general.projects')">
+      <i class="fas fa-project-diagram"></i>
     </button>
-    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'contact', e)" title="Contatti">
+    <button class="nav-btn" @click="(e) => $emit('scrollToSection', 'contact', e)" :title="$t('general.contact')">
       <i class="fas fa-envelope"></i>
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-// Non c'è bisogno di logica GSAP qui, l'evento viene emesso e gestito dal parent (App.vue)
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 const emit = defineEmits(['scrollToSection']);
 </script>
 

@@ -1,20 +1,20 @@
 <template>
   <section id="experience" class="section experience-section">
     <div style="width: 100%;">
-      <SectionTitle text="Esperienza Lavorativa" />
+      <SectionTitle :text="$t('experience.title')" />
       <div class="timeline">
         <div v-for="(exp, index) in experiences" :key="index"
              class="timeline-item"
              :class="index % 2 === 0 ? 'slide-in-left' : 'slide-in-right'">
           <div class="timeline-content">
-            <h3 style="color: #f5903d; font-size: 1.5rem; margin-bottom: 10px;">{{ exp.title }}</h3>
-            <h4 style="color: #333; font-size: 1.2rem; margin-bottom: 5px;">{{ exp.company }}</h4>
+            <h3 style="color: #f5903d; font-size: 1.5rem; margin-bottom: 10px;">{{ $t(`experience.job${index + 1}.title`) }}</h3>
+            <h4 style="color: #333; font-size: 1.2rem; margin-bottom: 5px;">{{ $t(`experience.job${index + 1}.company`) }}</h4>
             <p style="color: #666; margin-bottom: 15px;">
-              <i class="fas fa-calendar"></i> {{ exp.period }} |
-              <i class="fas fa-map-marker-alt"></i> {{ exp.location }}
+              <i class="fas fa-calendar"></i> {{ $t(`experience.job${index + 1}.period`) }} |
+              <i class="fas fa-map-marker-alt"></i> {{ $t(`experience.job${index + 1}.location`) }}
             </p>
             <ul style="list-style: none; padding: 0;">
-              <li v-for="task in exp.tasks" :key="task" style="margin: 8px 0; color: #555;">
+              <li v-for="task in $tm(`experience.job${index + 1}.tasks`)" :key="task" style="margin: 8px 0; color: #555;">
                 <i class="fas fa-check" style="color: #f5903d; margin-right: 10px;"></i>
                 {{ task }}
               </li>
@@ -31,6 +31,8 @@ import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import SectionTitle from '../common/SectionTitle.vue';
+import { useI18n } from 'vue-i18n';
+const { t, tm } = useI18n();
 
 const experiences = ref([
   {

@@ -1,21 +1,24 @@
 <template>
   <section id="skills" class="section skills-section">
     <div style="width: 100%; max-width: 1200px;">
-      <SectionTitle text="Competenze Tecniche" />
+      <SectionTitle :text="$t('skills.title')" />
       <div class="skills-grid">
         <div v-for="(skill, index) in skills" :key="skill.name"
              class="skill-card scale-in">
           <div class="skill-header">
             <i :class="skill.icon" class="skill-icon"></i>
-            <h3 class="skill-name">{{ skill.name }}</h3>
+            <h3 class="skill-name">{{ $t(`skills.list.${skill.key}`) }}</h3>
           </div>
           <div class="skill-bar">
             <!-- La barra di progresso è scalata in orizzontale, più performante -->
             <div class="skill-progress" :data-target="skill.level" :style="{ transform: `scaleX(${skill.level / 100})` }"></div>
           </div>
-          <!-- Ho rimosso la percentuale numerica per renderla meno fuorviante -->
-          <!-- <div class="skill-level">{{ skill.level }}%</div> -->
         </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <InteractiveButton @click="(e) => $emit('scrollToSection', 'experience', e)">
+          <i class="fas fa-briefcase"></i> {{ $t('skills.button') }}
+        </InteractiveButton>
       </div>
     </div>
   </section>
@@ -24,17 +27,21 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import SectionTitle from '../common/SectionTitle.vue';
+import InteractiveButton from '../common/InteractiveButton.vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const emit = defineEmits(['scrollToSection']);
 
 const skills = ref([
-  { name: 'TypeScript', icon: 'fab fa-js-square', level: 100 },
-  { name: 'Vue & Nuxt', icon: 'fab fa-vuejs', level: 100 },
-  { name: 'PHP & Laravel', icon: 'fab fa-php', level: 100 },
-  { name: 'MySQL', icon: 'fas fa-database', level: 100 },
-  { name: 'HTML/CSS', icon: 'fab fa-html5', level: 100 },
-  { name: 'GSAP', icon: 'fas fa-magic', level: 100 }
+  { name: 'TypeScript', key: 'typescript', icon: 'fab fa-js-square', level: 85 },
+  { name: 'Vue & Nuxt', key: 'vue-nuxt', icon: 'fab fa-vuejs', level: 90 },
+  { name: 'PHP & Laravel', key: 'php-laravel', icon: 'fab fa-php', level: 80 },
+  { name: 'MySQL', key: 'mysql', icon: 'fas fa-database', level: 75 },
+  { name: 'HTML/CSS', key: 'html-css', icon: 'fab fa-html5', level: 95 },
+  { name: 'GSAP', key: 'gsap', icon: 'fas fa-magic', level: 70 }
 ]);
 
 const setupSkillsScrollAnimations = () => {

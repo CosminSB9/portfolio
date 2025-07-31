@@ -1,0 +1,80 @@
+{
+  "general": {
+    "home": "Home",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Full Stack Developer",
+    "description": "Full Stack Developer specializing in <strong>Vue/Nuxt</strong>, <strong>TypeScript</strong>, and <strong>PHP/Laravel</strong> backend. I mainly focus on developing <strong>management software</strong>, but I am also passionate about animations, micro-interactions, and game development, which I integrate into my projects to create unique user experiences.",
+    "email": "stefanoo2013@gmail.com",
+    "phone": "3248722735",
+    "location": "Correggio (RE)",
+    "button": "Discover my skills"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "button": "See my experience",
+    "list": {
+      "typescript": "TypeScript",
+      "vue-nuxt": "Vue & Nuxt",
+      "php-laravel": "PHP & Laravel",
+      "mysql": "MySQL",
+      "html-css": "HTML/CSS",
+      "gsap": "GSAP"
+    }
+  },
+  "experience": {
+    "title": "Work Experience",
+    "job1": {
+      "title": "Full Stack Developer",
+      "company": "Studio il Granello",
+      "period": "11/2023 - Present",
+      "location": "Correggio (RE)",
+      "tasks": [
+        "Design and development of websites with Vue/Nuxt and TypeScript",
+        "Backend development with PHP and MySQL database management",
+        "Client and stakeholder relationship management",
+        "Code testing and validation for security and compatibility"
+      ]
+    },
+    "job2": {
+      "title": "Junior Full Stack Developer & Data Analyst",
+      "company": "Studio il Granello",
+      "period": "06/2023 - 10/2023",
+      "location": "Correggio (RE)",
+      "tasks": [
+        "Development of web applications with Vue and TypeScript",
+        "Google Analytics data analysis",
+        "Wireframe and graphic interface design",
+        "Code testing and maintenance"
+      ]
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "status": {
+      "completed": "Completed",
+      "in_development": "In Development",
+      "prototype": "Prototype"
+    },
+    "project1": {
+      "name": "Personal Portfolio",
+      "description": "Interactive portfolio developed with Vue.js and GSAP. Features: animated blobs, scroll animations, responsive design, and advanced micro-interactions."
+    }
+  },
+  "contact": {
+    "title": "Let's Work Together!",
+    "description": "I am always open to new professional opportunities and interesting projects. Do not hesitate to contact me!",
+    "email_button": "Send Email",
+    "call_button": "Call Me",
+    "linkedin_button": "LinkedIn",
+    "additional_info": {
+      "languages": "<strong>Languages:</strong> Italian (Native) • Romanian (Native) • English (Advanced)",
+      "hobbies": "<strong>Hobbies:</strong> Videogames • Hiking • Comics • Cars",
+      "car": "Car owner - B license"
+    }
+  }
+}

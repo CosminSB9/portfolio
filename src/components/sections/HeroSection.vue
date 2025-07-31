@@ -5,12 +5,11 @@
         Cosmin Stefan<br />
         <span style="color: #ffb347;">Bancescu</span>
       </h1>
-      <p class="hero-subtitle">Full Stack Developer</p>
+      <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
       <div class="hero-description">
-        <p>Sviluppatore Full Stack specializzato in <strong>Vue/Nuxt</strong>, <strong>TypeScript</strong> e 
-             nel backend <strong>PHP/Laravel</strong>. Mi dedico principalmente allo sviluppo di 
-            <strong>software gestionali</strong>, ma sono anche un appassionato di animazioni, micro-interazioni e game development, 
-            che integro nei miei progetti per creare esperienze utente uniche.</p>
+        <!-- eslint-disable vue/no-v-html -->
+        <p v-html="t('hero.description')"></p>
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </section>
@@ -19,16 +18,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { gsap } from 'gsap';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 
 const emit = defineEmits(['scrollToSection']);
-
-const openEmail = () => {
-  window.location.href = 'mailto:stefanoo2013@gmail.com?subject=Contatto&body=Ciao, ti scrivo dal tuo portfolio...';
-};
-
-const callPhone = () => {
-  window.location.href = 'tel:3248722735';
-};
 
 const animateHero = () => {
   const tl = gsap.timeline();
@@ -114,6 +108,12 @@ onMounted(() => {
 .contact-item:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(-5px);
+}
+
+/* Animazioni base per GSAP ScrollTrigger, le classi .fade-in verranno rimosse da GSAP */
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px);
 }
 
 @media (max-width: 768px) {

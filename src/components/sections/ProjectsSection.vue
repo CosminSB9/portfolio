@@ -1,7 +1,7 @@
 <template>
   <section id="projects" class="section projects-section">
     <div style="width: 100%; max-width: 1200px;">
-      <SectionTitle text="I Miei Progetti" />
+      <SectionTitle :text="$t('projects.title')" />
       <div class="projects-grid">
         <div v-for="(project, index) in projects" :key="project.name"
              class="project-card scale-in"
@@ -16,8 +16,8 @@
             </div>
           </div>
           <div class="project-content">
-            <h3 class="project-title">{{ project.name }}</h3>
-            <p class="project-description">{{ project.description }}</p>
+            <h3 class="project-title">{{ $t(`projects.project${index + 1}.name`) }}</h3>
+            <p class="project-description">{{ $t(`projects.project${index + 1}.description`) }}</p>
             <div class="project-tech">
               <span v-for="tech in project.technologies" :key="tech" class="tech-tag">
                 {{ tech }}
@@ -25,7 +25,7 @@
             </div>
             <div class="project-status" :class="project.status.toLowerCase().replace(' ', '-')">
               <i class="fas fa-circle"></i>
-              {{ project.status }}
+              {{ $t(`projects.status.${project.statusKey}`) }}
             </div>
           </div>
         </div>
@@ -37,7 +37,10 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import SectionTitle from '../common/SectionTitle.vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const projects = ref([
   {
@@ -46,27 +49,9 @@ const projects = ref([
     technologies: ['Vue.js', 'GSAP', 'CSS3', 'HTML5', 'TypeScript'],
     icon: 'fas fa-user-circle',
     status: 'Completato',
+    statusKey: 'completed',
     link: '#hero' // Link interno per esempio, in un vero progetto sarebbero URL esterni
   }
-  // Aggiungi altri progetti qui!
-  /*
-  {
-    name: 'E-commerce Example',
-    description: 'Piattaforma e-commerce completa con gestione prodotti, carrello e checkout sicuro.',
-    technologies: ['Nuxt.js', 'TailwindCSS', 'Stripe', 'Laravel'],
-    icon: 'fas fa-shopping-cart',
-    status: 'In Sviluppo',
-    link: 'https://example.com/ecommerce'
-  },
-  {
-    name: 'CRM Web App',
-    description: 'Applicazione CRM per la gestione dei clienti, contatti e interazioni.',
-    technologies: ['Vue.js', 'Node.js', 'MongoDB', 'GraphQL'],
-    icon: 'fas fa-users',
-    status: 'Prototipo',
-    link: 'https://example.com/crm'
-  }
-  */
 ]);
 
 const openProjectLink = (link: string) => {
@@ -96,7 +81,7 @@ const setupProjectsScrollAnimations = () => {
       ease: 'back.out(1.7)',
       scrollTrigger: {
         trigger: el,
-        start: 'top 100%',
+        start: 'top 80%',
         toggleActions: 'play none none reverse',
       }
     });

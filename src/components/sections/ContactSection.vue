@@ -1,29 +1,27 @@
 <template>
   <section id="contact" class="section contact-section">
     <div style="text-align: center; color: white;">
-      <!-- Rimosso `fade-in` da qui -->
-      <SectionTitle text="Lavoriamo Insieme!" />
-      <!-- Rimosso `fade-in` da qui -->
+      <SectionTitle :text="$t('contact.title')" />
       <p class="contact-description">
-        Sono sempre aperto a nuove opportunità professionali e progetti interessanti.
-        Non esitare a contattarmi!
+        {{ $t('contact.description') }}
       </p>
       <div class="contact-buttons-container">
-        <!-- Questi pulsanti non hanno classi di animazione nel template -->
         <InteractiveButton @click="openEmail" style="background: rgba(255,255,255,0.2);">
-          <i class="fas fa-envelope"></i> Invia Email
+          <i class="fas fa-envelope"></i> {{ $t('contact.email_button') }}
         </InteractiveButton>
         <InteractiveButton @click="callPhone" style="background: rgba(255,255,255,0.2);">
-          <i class="fas fa-phone"></i> Chiamami
+          <i class="fas fa-phone"></i> {{ $t('contact.call_button') }}
         </InteractiveButton>
         <InteractiveButton @click="openLinkedIn" style="background: rgba(255,255,255,0.2);">
-          <i class="fab fa-linkedin"></i> LinkedIn
+          <i class="fab fa-linkedin"></i> {{ $t('contact.linkedin_button') }}
         </InteractiveButton>
       </div>
       <div class="additional-info">
-        <p><strong>Lingue:</strong> Italiano (Madrelingua) • Rumeno (Madrelingua) • Inglese (Avanzato)</p>
-        <p style="margin-top: 10px;"><strong>Hobby:</strong> Videogiochi • Nuoto • Fumetti • Automobili</p>
-        <p style="margin-top: 10px;"><i class="fas fa-car"></i> Automunito - Patente B</p>
+        <!-- eslint-disable vue/no-v-html -->
+        <p v-html="$t('contact.additional_info.languages')"></p>
+        <p style="margin-top: 10px;" v-html="$t('contact.additional_info.hobbies')"></p>
+        <p style="margin-top: 10px;" v-html="$t('contact.additional_info.car')"></p>
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </section>
@@ -34,18 +32,20 @@ import { onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import InteractiveButton from '../common/InteractiveButton.vue';
-import SectionTitle from '../common/SectionTitle.vue'; // Aggiunto import del titolo
+import SectionTitle from '../common/SectionTitle.vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const openEmail = () => {
-  window.location.href = 'mailto:stefanoo2013@gmail.com?subject=Contatto&body=Ciao, ti scrivo dal tuo portfolio...';
+  window.location.href = `mailto:${t('hero.email')}?subject=Contatto&body=Ciao, ti scrivo dal tuo portfolio...`;
 };
 
 const callPhone = () => {
-  window.location.href = 'tel:3248722735';
+  window.location.href = `tel:${t('hero.phone')}`;
 };
 
 const openLinkedIn = () => {
-  window.open('https://www.linkedin.com/in/cosmin-stefan-bancescu', '_blank');
+  window.open('[https://www.linkedin.com/in/cosmin-stefan-bancescu](https://www.linkedin.com/in/cosmin-stefan-bancescu)', '_blank');
 };
 
 const setupContactScrollAnimations = () => {
@@ -63,16 +63,15 @@ const setupContactScrollAnimations = () => {
     }
   });
 
-  gsap.fromTo('.contact-buttons-container button', { opacity: 0},{
+  gsap.fromTo('.contact-buttons-container button', {opacity: 0},{
     opacity: 1,
     scale: 0.9,
-    y: 0,
-    stagger: 0.1,
+    stagger: 0.2,
     duration: 0.6,
-    ease: 'back.out(1.5)',
+    ease: 'back.out(1.7)',
     scrollTrigger: {
       trigger: '.contact-buttons-container',
-      start: 'top 90%',
+      start: 'top 95%',
       toggleActions: 'play none none reverse',
     }
   });
