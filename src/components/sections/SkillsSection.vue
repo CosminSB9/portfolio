@@ -15,11 +15,6 @@
           </div>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 40px;">
-        <InteractiveButton @click="(e) => $emit('scrollToSection', 'experience', e)">
-          <i class="fas fa-briefcase"></i> {{ $t('skills.button') }}
-        </InteractiveButton>
-      </div>
     </div>
   </section>
 </template>
@@ -27,21 +22,19 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import SectionTitle from '../common/SectionTitle.vue';
-import InteractiveButton from '../common/InteractiveButton.vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 const emit = defineEmits(['scrollToSection']);
 
 const skills = ref([
-  { name: 'TypeScript', key: 'typescript', icon: 'fab fa-js-square', level: 85 },
-  { name: 'Vue & Nuxt', key: 'vue-nuxt', icon: 'fab fa-vuejs', level: 90 },
-  { name: 'PHP & Laravel', key: 'php-laravel', icon: 'fab fa-php', level: 80 },
-  { name: 'MySQL', key: 'mysql', icon: 'fas fa-database', level: 75 },
-  { name: 'HTML/CSS', key: 'html-css', icon: 'fab fa-html5', level: 95 },
-  { name: 'GSAP', key: 'gsap', icon: 'fas fa-magic', level: 70 }
+  { name: 'TypeScript', key: 'typescript', icon: 'fab fa-js-square', level: 100 },
+  { name: 'Vue & Nuxt', key: 'vue-nuxt', icon: 'fab fa-vuejs', level: 100 },
+  { name: 'PHP & Laravel', key: 'php-laravel', icon: 'fab fa-php', level: 100 },
+  { name: 'MySQL', key: 'mysql', icon: 'fas fa-database', level: 100 },
+  { name: 'HTML/CSS', key: 'html-css', icon: 'fab fa-html5', level: 100 },
+  { name: 'GSAP', key: 'gsap', icon: 'fas fa-magic', level: 100 }
 ]);
 
 const setupSkillsScrollAnimations = () => {
