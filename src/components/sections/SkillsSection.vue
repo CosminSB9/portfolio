@@ -94,6 +94,7 @@ onMounted(() => {
   position: relative;
   z-index: 10;
   color: #333; /* Colore testo per questa sezione */
+  overflow-y: hidden;
 }
 
 .skills-grid {
@@ -102,6 +103,7 @@ onMounted(() => {
   gap: 30px;
   max-width: 1200px;
   width: 100%;
+  overflow-y: hidden;
 }
 
 .skill-card {

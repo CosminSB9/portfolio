@@ -49,6 +49,7 @@ onMounted(() => {
   margin-bottom: 60px;
   color: #333;
   position: relative;
+  overflow-y: hid;
 }
 
 .section-title::after {

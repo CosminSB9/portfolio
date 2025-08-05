@@ -118,6 +118,7 @@ onMounted(() => {
   width: 100%;
   position: relative;
   margin: 0 auto; /* Centra la timeline */
+  overflow-y: hidden;
 }
 
 .timeline::before {
@@ -150,16 +151,15 @@ onMounted(() => {
   background: white;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: all 0.3s ease;
   color: #333; /* Colore testo all'interno della card */
 }
 
 .timeline-content:hover {
-  transform: scale(1.05);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(245, 144, 61, 0.4);
 }
+
 
 .timeline-content::before {
   content: '';

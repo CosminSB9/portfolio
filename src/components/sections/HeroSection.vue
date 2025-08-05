@@ -29,7 +29,6 @@ const animateHero = () => {
   tl.from('.hero-title', { opacity: 0, y: 100, duration: 1.2, ease: 'power3.out' })
     .from('.hero-subtitle', { opacity: 0, y: 50, duration: 1.0, ease: 'power2.out' }, '-=0.8')
     .from('.hero-description', { opacity: 0, y: 50, duration: 1.0, ease: 'power2.out' }, '-=0.6')
-    .from('.contact-item', { opacity: 0, y: 30, duration: 0.8, stagger: 0.2, ease: 'power2.out' }, '-=0.5')
     .from('.interactive-btn', { opacity: 0, scale: 0.8, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.3');
 };
 
@@ -58,6 +57,7 @@ onMounted(() => {
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.1;
+  overflow-y: hidden;
 }
 
 .hero-subtitle {

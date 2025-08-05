@@ -5,7 +5,6 @@
       <MouseHighlight />
       <BackgroundBlobs />
       <NavigationBar @scroll-to-section="scrollToSection" />
-      <LanguageSwitcher />
 
       <!-- Sections -->
       <HeroSection @scroll-to-section="scrollToSection" />
@@ -32,7 +31,6 @@ import SkillsSection from './components/sections/SkillsSection.vue';
 import ExperienceSection from './components/sections/ExperienceSection.vue';
 import ProjectsSection from './components/sections/ProjectsSection.vue';
 import ContactSection from './components/sections/ContactSection.vue';
-import LanguageSwitcher from './components/layout/LanguageSwitcher.vue';
 
 // Registra i plugin GSAP una sola volta nell'app principale
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
