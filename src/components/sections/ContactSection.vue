@@ -7,13 +7,19 @@
       </p>
       <div class="contact-buttons-container">
         <InteractiveButton @click="openEmail" style="background: rgba(255,255,255,0.2);">
-          <i class="fas fa-envelope"></i> {{ $t('contact.email_button') }}
+          <div class="btn-content">
+           <i class="fas fa-envelope" style="margin-right: 5px;"></i> {{ $t('contact.email_button') }}
+           </div>
         </InteractiveButton>
         <InteractiveButton @click="callPhone" style="background: rgba(255,255,255,0.2);">
-          <i class="fas fa-phone"></i> {{ $t('contact.call_button') }}
+          <div class="btn-content">
+            <i class="fas fa-phone" style="margin-right: 5px;"></i> {{ $t('contact.call_button') }}
+          </div>
         </InteractiveButton>
         <InteractiveButton @click="openLinkedIn" style="background: rgba(255,255,255,0.2);">
-          <i class="fab fa-linkedin"></i> {{ $t('contact.linkedin_button') }}
+         <div class="btn-content">
+            <i class="fab fa-linkedin" style="margin-right: 5px;"></i> {{ $t('contact.linkedin_button') }}
+         </div>
         </InteractiveButton>
       </div>
       <div class="additional-info">
@@ -146,6 +152,11 @@ onMounted(() => {
 .fade-in {
   opacity: 0;
   transform: translateY(50px);
+}
+
+.btn-content {
+  display: flex;
+  align-items:center;
 }
 
 @media (max-width: 768px) {
