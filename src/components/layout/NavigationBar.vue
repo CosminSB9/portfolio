@@ -17,19 +17,19 @@
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="nav-btn" @click="(e) => scrollToSection('hero', e)" :title="$t('general.home')">
+        <button class="nav-btn" @click="(e) => scrollToSection('hero', e)" :data-title="$t('general.home')">
           <i class="fas fa-home"></i>
         </button>
-        <button class="nav-btn" @click="(e) => scrollToSection('skills', e)" :title="$t('general.skills')">
+        <button class="nav-btn" @click="(e) => scrollToSection('skills', e)" :data-title="$t('general.skills')">
           <i class="fas fa-code"></i>
         </button>
-        <button class="nav-btn" @click="(e) => scrollToSection('experience', e)" :title="$t('general.experience')">
+        <button class="nav-btn" @click="(e) => scrollToSection('experience', e)" :data-title="$t('general.experience')">
           <i class="fas fa-briefcase"></i>
         </button>
-        <button class="nav-btn" @click="(e) => scrollToSection('projects', e)" :title="$t('general.projects')">
+        <button class="nav-btn" @click="(e) => scrollToSection('projects', e)" :data-title="$t('general.projects')">
           <i class="fas fa-project-diagram"></i>
         </button>
-        <button class="nav-btn" @click="(e) => scrollToSection('contact', e)" :title="$t('general.contact')">
+        <button class="nav-btn" @click="(e) => scrollToSection('contact', e)" :data-title="$t('general.contact')">
           <i class="fas fa-envelope"></i>
         </button>
       </div>
@@ -38,12 +38,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue'; // Importato watch
 import { useI18n } from 'vue-i18n';
 import { gsap } from 'gsap';
 
 const isMenuOpen = ref(false);
 const { availableLocales, locale } = useI18n();
+
+// Watcher per disabilitare/abilitare lo scorrimento del body
+watch(isMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+});
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -118,7 +127,7 @@ const scrollToSection = (sectionId: string, event?: Event) => {
 .nav-buttons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .lang-btn {
@@ -136,12 +145,16 @@ const scrollToSection = (sectionId: string, event?: Event) => {
   transition: all 0.3s ease;
   overflow: hidden;
   padding: 0;
+  margin: 5px;
 }
 
 .lang-btn.active-lang {
   border:2px solid #f5903d;
 }
 
+.lang-btn:hover {
+  transform: translateY(-2px);
+}
 
 .flag-icon {
   width: 100%;
@@ -159,12 +172,19 @@ const scrollToSection = (sectionId: string, event?: Event) => {
   justify-content: center;
   font-size: 20px;
   color: #f5903d;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-  position: relative;
+  position: relative; /* Necessario per posizionare il tooltip */
+  overflow: visible; /* Assicurati che il tooltip non venga tagliato */
   width: 60px; /* Mantieni le dimensioni originali */
   height: 60px; /* Mantieni le dimensioni originali */
   border-radius: 50%; /* Mantieni il bordo arrotondato */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombra più sottile e rotonda */
+  margin: 5px;
+}
+
+.nav-btn:hover {
+  transform: scale(1.1);
 }
 
 .nav-btn::before {
@@ -182,9 +202,35 @@ const scrollToSection = (sectionId: string, event?: Event) => {
   left: 100%;
 }
 
-.menu-toggle {
-  display: none;
+/* Stili per il tooltip personalizzato */
+.nav-btn::after {
+  content: attr(data-title); /* Prende il testo dall'attributo data-title */
+  position: absolute;
+  left: -10px; /* Posiziona il tooltip a sinistra del pulsante */
+  top: 50%;
+  transform: translate(-100%, -50%); /* Sposta il tooltip a sinistra e lo centra verticalmente */
+  background: #333; /* Sfondo scuro per il tooltip */
+  color: #fff; /* Testo bianco */
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap; /* Impedisce al testo di andare a capo */
+  font-size: 0.9rem;
+  opacity: 0; /* Inizialmente invisibile */
+  visibility: hidden; /* Inizialmente nascosto */
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  z-index: 1002; /* Assicurati che sia sopra tutto */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.nav-btn:hover::after {
+  opacity: 1; /* Rende visibile al passaggio del mouse */
+  visibility: visible;
+  transform: translate(-110%, -50%); /* Sposta leggermente per un effetto più fluido */
+}
+
+  .menu-toggle { 
+    display: none;
+  }
 
 /* Menu mobile */
 @media (max-width: 768px) {
@@ -235,7 +281,7 @@ const scrollToSection = (sectionId: string, event?: Event) => {
     right: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: #fff; /* Ora è completamente opaco */
     backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
@@ -253,6 +299,7 @@ const scrollToSection = (sectionId: string, event?: Event) => {
 
   .nav-buttons {
     gap: 20px;
+    padding: 5px
   }
 
   .nav-btn {
