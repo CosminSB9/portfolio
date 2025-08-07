@@ -43,15 +43,15 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 const openEmail = () => {
-  window.location.href = `mailto:${t('hero.email')}?subject=Contatto&body=Ciao, ti scrivo dal tuo portfolio...`;
+  window.location.href = `mailto:stefanoo2013@gmail.com`;
 };
 
 const callPhone = () => {
-  window.location.href = `tel:${t('hero.phone')}`;
+  window.location.href = `tel:3248722735}`;
 };
 
 const openLinkedIn = () => {
-  window.open('[https://www.linkedin.com/in/cosmin-stefan-bancescu](https://www.linkedin.com/in/cosmin-stefan-bancescu)', '_blank');
+  window.open('https://www.linkedin.com/in/cosmin-stefan-bancescu/', '_blank');
 };
 
 const setupContactScrollAnimations = () => {
